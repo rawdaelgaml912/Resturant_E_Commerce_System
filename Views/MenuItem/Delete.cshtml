@@ -1,0 +1,70 @@
+﻿@model Resturant_Project.Models.MenuItem
+
+@{
+    ViewData["Title"] = "Delete Menu Item";
+}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-6">
+
+            <div class="card shadow-sm border-0">
+
+                <div class="card-body p-4 text-center">
+
+                    <h2 class="fw-bold mb-4">
+                        Delete Menu Item
+                    </h2>
+
+                    <p class="text-muted mb-4">
+                        Are you sure you want to delete this menu item?
+                    </p>
+
+                    <div class="mb-4">
+
+                        <h4 class="fw-bold">
+                            @Model.Name
+                        </h4>
+
+                        <p class="text-muted mb-0">
+                            @Model.Price EGP
+                        </p>
+
+                    </div>
+
+                    <form asp-controller="MenuItem"
+                          asp-action="DeleteConfirmed"
+                          method="post">
+
+                        <input type="hidden"
+                               name="id"
+                               value="@Model.MenuItemId" />
+
+                        <div class="d-flex justify-content-center gap-2">
+
+                            <a asp-controller="MenuItem"
+                               asp-action="Index"
+                               class="btn btn-secondary">
+                                Cancel
+                            </a>
+
+                            <button type="submit"
+                                    class="btn btn-danger">
+                                Delete
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

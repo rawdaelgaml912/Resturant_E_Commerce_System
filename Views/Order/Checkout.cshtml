@@ -1,0 +1,204 @@
+﻿@model List<Restaurant_Project.Models.CartItem>
+
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<div class="container py-5">
+
+    <div class="text-center mb-5">
+        <h1 class="fw-bold">Checkout</h1>
+        <p class="text-muted">
+            Complete your order
+        </p>
+    </div>
+
+    <div class="row g-4">
+
+        <!-- Customer Information -->
+
+        <div class="col-md-7">
+
+            <div class="card shadow-sm border-0">
+
+                <div class="card-body p-4">
+
+                    <h4 class="fw-bold mb-4">
+                        Customer Information
+                    </h4>
+
+                    <form asp-controller="Order"
+                          asp-action="PlaceOrder"
+                          method="post">
+
+                        <!-- Name -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Full Name
+                            </label>
+
+                            <input type="text"
+                                   name="FullName"
+                                   class="form-control"
+                                   placeholder="Enter your name"
+                                   required />
+
+                        </div>
+
+
+                        <!-- Phone -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Phone Number
+                            </label>
+
+                            <input type="text"
+                                   name="Phone"
+                                   class="form-control"
+                                   placeholder="Enter your phone number"
+                                   required />
+
+                        </div>
+
+
+                        <!-- Address -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Address
+                            </label>
+
+                            <textarea name="Address"
+                                      class="form-control"
+                                      rows="3"
+                                      placeholder="Enter your address"
+                                      required></textarea>
+
+                        </div>
+
+
+                        <!-- Payment Method -->
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+                                Payment Method
+                            </label>
+
+                            <select name="paymentMethod"
+                                    id="paymentMethod"
+                                    class="form-select"
+                                    required>
+
+                                <option value="">
+                                    Select Payment Method
+                                </option>
+
+                                <option value="Cash">
+                                    Cash on Delivery
+                                </option>
+
+                                <option value="Card">
+                                    Card
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- Buttons -->
+
+                        <div class="d-flex gap-2 mt-4">
+
+                            <a asp-controller="Home"
+                               asp-action="Index"
+                               class="btn btn-outline-secondary w-50">
+
+                                Continue Shopping
+
+                            </a>
+
+                            <button type="submit"
+                                    class="btn btn-primary w-50">
+
+                                Place Order
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Order Summary -->
+
+        <div class="col-md-5">
+
+            <div class="card shadow-sm border-0">
+
+                <div class="card-body p-4">
+
+                    <h4 class="fw-bold mb-4">
+                        Order Summary
+                    </h4>
+
+                    @foreach (var item in Model)
+                    {
+                        <div class="d-flex justify-content-between mb-3">
+
+                            <div>
+
+                                <span class="fw-bold">
+                                    @item.Name
+                                </span>
+
+                                <small class="text-muted d-block">
+                                    Quantity: @item.Quantity
+                                </small>
+
+                            </div>
+
+                            <span class="fw-bold">
+                                @(item.Price * item.Quantity) EGP
+                            </span>
+
+                        </div>
+                    }
+
+                    <hr />
+
+                    <div class="d-flex justify-content-between">
+
+                        <h5 class="fw-bold">
+                            Total
+                        </h5>
+
+                        <h5 class="fw-bold text-primary">
+                            @Model.Sum(
+                                x => x.Price * x.Quantity
+                            ) EGP
+                        </h5>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

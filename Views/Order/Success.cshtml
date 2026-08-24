@@ -1,0 +1,80 @@
+﻿@model Resturant_Project.Models.Order
+
+@{
+    ViewData["Title"] = "Order Success";
+}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-7">
+
+            <div class="card shadow-sm border-0">
+
+                <div class="card-body p-5 text-center">
+
+                    <h1 class="fw-bold text-success mb-3">
+                        Order Placed Successfully!
+                    </h1>
+
+                    <p class="text-muted mb-4">
+                        Thank you for your order.
+                    </p>
+
+                    <hr />
+
+                    <div class="mb-3">
+                        <strong>Order Number:</strong>
+                        #@Model.OrderId
+                    </div>
+
+                    <div class="mb-3">
+                        <strong>Total:</strong>
+                        @Model.TotalPrice EGP
+                    </div>
+
+                    <div class="mb-3">
+                        <strong>Payment Method:</strong>
+                        @ViewBag.PaymentMethod
+                    </div>
+
+                    <div class="mb-4">
+
+                        <strong>
+                            Payment Status:
+                        </strong>
+
+                        @if (ViewBag.PaymentStatus ==
+                        Resturant_Project.Models.PaymentStatus.Paid)
+                        {
+                            <span class="badge bg-success">
+                                Paid
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-warning text-dark">
+                                Pending
+                            </span>
+                        }
+
+                    </div>
+
+                    <a asp-controller="Home"
+                       asp-action="Index"
+                       class="btn btn-primary px-4">
+
+                        Back to Menu
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

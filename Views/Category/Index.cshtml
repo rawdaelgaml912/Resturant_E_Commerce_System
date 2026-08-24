@@ -1,0 +1,139 @@
+﻿@model List<Resturant_Project.Models.Category>
+
+@{
+    ViewData["Title"] = "Categories";
+}
+
+<div class="container py-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <h1 class="fw-bold mb-0">
+            Categories
+        </h1>
+
+        <a asp-controller="Category"
+           asp-action="Create"
+           class="btn btn-primary">
+            Add New Category
+        </a>
+
+    </div>
+
+    <div class="row g-3">
+
+        @foreach (var category in Model)
+        {
+            <div class="col-12">
+
+                <div class="card border-0 shadow-sm">
+
+                    <div class="card-body d-flex justify-content-between align-items-center">
+
+                        <div class="d-flex align-items-center">
+
+                            <span class="fw-bold me-3">
+                                @category.CategoryId
+                            </span>
+
+                            <h4 class="fw-bold mb-0">
+                                @category.Name
+                            </h4>
+
+                        </div>
+
+                        <div>
+
+                            <a asp-controller="Category"
+                               asp-action="Edit"
+                               asp-route-id="@category.CategoryId"
+                               class="btn btn-warning me-2">
+                                Edit
+                            </a>
+
+                            <button type="button"
+                                    class="btn btn-danger"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#deleteModal-@category.CategoryId">
+                                Delete
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Delete Modal -->
+            <div class="modal fade"
+                 id="deleteModal-@category.CategoryId"
+                 tabindex="-1"
+                 aria-hidden="true">
+
+                <div class="modal-dialog modal-dialog-centered">
+
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+
+                            <h5 class="modal-title fw-bold">
+                                Delete Category
+                            </h5>
+
+                            <button type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="modal">
+                            </button>
+
+                        </div>
+
+                        <div class="modal-body text-center">
+
+                            <h5 class="mb-3">
+                                Are you sure you want to delete
+                                <strong>@category.Name</strong>?
+                            </h5>
+
+                            <p class="text-muted mb-0">
+                                This action cannot be undone.
+                            </p>
+
+                        </div>
+
+                        <div class="modal-footer justify-content-center">
+
+                            <button type="button"
+                                    class="btn btn-secondary"
+                                    data-bs-dismiss="modal">
+                                Cancel
+                            </button>
+
+                            <form asp-controller="Category"
+                                  asp-action="DeleteConfirmed"
+                                  method="post">
+
+                                <input type="hidden"
+                                       name="id"
+                                       value="@category.CategoryId" />
+
+                                <button type="submit"
+                                        class="btn btn-danger">
+                                    Delete
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+
+    </div>
+
+</div>
