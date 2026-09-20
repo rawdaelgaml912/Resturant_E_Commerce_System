@@ -66,4 +66,4 @@ Through this project, I practiced:
 
 Rawda Elgaml
 
-Aspiring .NET Backend Developer
+Junior .NET Backend Developer
